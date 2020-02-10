@@ -1,0 +1,162 @@
+.calendar{
+  box-sizing: border-box;
+  width: 95%;
+  /* height: 90vh; */
+  /* display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center; */
+  /* flex-grow: 1; */
+  border: 1px solid green;
+}
+.react-calendar-timeline * {
+  box-sizing: border-box;
+}
+
+.react-calendar-timeline .rct-outer {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.react-calendar-timeline .rct-scroll {
+  display: inline-block;
+  white-space: normal;
+  vertical-align: top;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -ms-touch-action: none;
+  touch-action: none;
+}
+
+.react-calendar-timeline .rct-item:hover {
+  z-index: 88;
+}
+
+.react-calendar-timeline .rct-item  {
+  position: sticky;
+  position: -webkit-sticky;
+  left: 0px;
+  overflow: hidden;
+  display: inline-block;
+  border-radius: 13px;
+  padding: 0 6px;
+  height: 100%;
+}
+
+.react-calendar-timeline .rct-sidebar {
+  overflow: hidden;
+  white-space: normal;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  box-sizing: border-box;
+  border-right:none;
+}
+.react-calendar-timeline .rct-sidebar.rct-sidebar-right {
+  border-right: 0;
+  border-left: none;
+}
+.react-calendar-timeline .rct-sidebar .rct-sidebar-row {
+  padding: 0 4px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+  margin: 0;
+  border-bottom: none;
+}
+.react-calendar-timeline .rct-sidebar .rct-sidebar-row.rct-sidebar-row-odd {
+  background: transparent;
+}
+.react-calendar-timeline .rct-sidebar .rct-sidebar-row.rct-sidebar-row-even {
+  background: transparent;
+}
+
+.react-calendar-timeline .rct-vertical-lines .rct-vl {
+  position: absolute;
+  margin-left: 17px;
+  border-left: 1px solid #bbb;
+  z-index: 30;
+}
+.react-calendar-timeline .rct-vertical-lines .rct-vl.rct-vl-first {
+  border-left-width: 2px;
+}
+.react-calendar-timeline .rct-vertical-lines .rct-vl.rct-day-6,
+.react-calendar-timeline .rct-vertical-lines .rct-vl.rct-day-0 {
+  border-left: 2px solid #ffeded ;
+  background-color: white;
+  /* color :#ffeded */
+}
+
+.react-calendar-timeline .rct-horizontal-lines {
+  -webkit-user-select: none;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.react-calendar-timeline .rct-horizontal-lines .rct-hl-even,
+.react-calendar-timeline .rct-horizontal-lines .rct-hl-odd {
+  border: none;
+  box-sizing: border-box;
+  z-index: 40;
+}
+.react-calendar-timeline .rct-horizontal-lines .rct-hl-odd {
+  background: transparent;
+}
+.react-calendar-timeline .rct-horizontal-lines .rct-hl-even {
+  background: transparent;
+}
+
+.react-calendar-timeline .rct-cursor-line {
+  position: absolute;
+  width: 2px;
+  z-index: 51;
+}
+
+.react-calendar-timeline .rct-dateHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  cursor: pointer;
+  font-size: 16px; 
+  background-color: white;
+  color: green;
+  background: white;
+  border: 1px solid green;
+  border-radius: 50%;
+}
+
+/* .
+vidi kako da gi napravis datumite od vikendite dr boja! */ 
+/* .react-calendar-timeline .rct-dateHeader {
+  color: green;
+  background: white;
+  border: 1px solid green;
+  border-radius: 50%;
+
+} */
+
+.react-calendar-timeline .rct-dateHeader-primary {
+  /* background-color: initial; */
+  /* border-left: 1px solid #bbb; */
+    /* border-right: 1px solid #bbb; */
+  background: #ffeded;
+  border: none;
+  border-radius: 0%;
+  color: #6b6b6b;
+}
+
+.react-calendar-timeline .rct-header-root {
+  /* background: #ffeded; */
+  background: white;
+  /* border-bottom: 1px solid #bbb;  */
+  border-bottom: none;
+}
+
+.react-calendar-timeline .rct-calendar-header {
+  /* border: 1px solid #bbb;  */
+  background: white;
+  border: none;
+}
