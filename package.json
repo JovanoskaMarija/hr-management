@@ -8,6 +8,7 @@
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
     "antd": "^3.26.9",
+    "font-awesome": "^4.7.0",
     "interactjs": "^1.8.4",
     "moment": "^2.24.0",
     "react": "^16.12.0",

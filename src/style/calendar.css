@@ -1,12 +1,133 @@
-.calendar{
+.calendar-container {
+  /* display: flex;
+  flex-direction: column; */
+  /* 
+   */
+  /* justify-content: center;
+  align-items: center; */
+  /* width: 100%; */
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  background: #efefef;
+}
+.row {
+  display: flex;
+  width: 100%;
+}
+.calendar {
+  /* display: block; */
+  background: #ffffff;
+  max-width: 500px;
+  /* border: solid 1px #cccccc; */
+  margin: 10px auto;
+  box-shadow: 0 0 15px 0 #c0c0c0;
+  border-radius: 10px;
+  font-size: 1.3rem;
+  text-align: center;
+}
+.calendar .calendar-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  cursor: default;
+  font-size: 1.4rem;
+  display: block;
+  font-weight: bold;
+  text-transform: uppercase;
+  user-select: none;
+  /* border-radius: 10px 10px 0 0 ; */
+}
+.calendar .calendar-header .month-display {
+  align-items: center;
+  height: 50px;
+  background: #2875c7;
+  border-radius: 7px 7px 0 0 ;
+}
+.calendar .calendar-header .month-label {
+  flex: 1;
+}
+.calendar .calendar-header .arrow {
+  text-align: center;
+  flex-basis: 15%;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.calendar .calendar-header .arrow:hover {
+  background: #1f5c9d;
+}
+.calendar .week {
+  border-top: solid 1px #cccccc;
+}
+.calendar .week:first-child {
+  border-top: none;
+}
+.calendar .day-names {
+  color: #2875c7;
+  font-weight: bold;
+  cursor: default;
+  font-size: 1.2rem;
+}
+.calendar .day-names .day {
+  cursor: default;
+}
+.calendar .day-names .day:hover {
+  background: inherit;
+}
+.calendar .day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  height: 45px;
+  border-left: solid 1px #cccccc;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.calendar .day:hover {
+  background: #efefef;
+}
+.calendar .day:first-child {
+  border-left: none;
+  color: #cccccc;
+  cursor: default;
+}
+.calendar .day:last-child {
+  color: #cccccc;
+  cursor: default;
+}
+.calendar .day.today {
+  background: #dceaf8;
+}
+.calendar .day.different-month {
+  color: #c0c0c0;
+}
+.calendar .day.selected {
+  background: #2875c7;
+  color: #ffffff;
+  /* border-radius: 50%; */
+}
+.calendar-buttons{
+  
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* za react-calendar-timeline */
+/* .calendar{
   box-sizing: border-box;
   width: 95%;
-  /* height: 90vh; */
-  /* display: flex;
-  flex-direction: row;
-  align-content: center;
-  align-items: center; */
-  /* flex-grow: 1; */
   border: 1px solid green;
 }
 .react-calendar-timeline * {
@@ -39,7 +160,7 @@
   left: 0px;
   overflow: hidden;
   display: inline-block;
-  border-radius: 13px;
+  border-radius: 20px;
   padding: 0 6px;
   height: 100%;
 }
@@ -75,8 +196,8 @@
 
 .react-calendar-timeline .rct-vertical-lines .rct-vl {
   position: absolute;
-  margin-left: 17px;
-  border-left: 1px solid #bbb;
+  margin: auto;
+  border-left: 2px solid #bbb;
   z-index: 30;
 }
 .react-calendar-timeline .rct-vertical-lines .rct-vl.rct-vl-first {
@@ -86,7 +207,6 @@
 .react-calendar-timeline .rct-vertical-lines .rct-vl.rct-day-0 {
   border-left: 2px solid #ffeded ;
   background-color: white;
-  /* color :#ffeded */
 }
 
 .react-calendar-timeline .rct-horizontal-lines {
@@ -122,26 +242,12 @@
   cursor: pointer;
   font-size: 16px; 
   background-color: white;
-  color: green;
+  border: none;
   background: white;
-  border: 1px solid green;
-  border-radius: 50%;
 }
 
-/* .
-vidi kako da gi napravis datumite od vikendite dr boja! */ 
-/* .react-calendar-timeline .rct-dateHeader {
-  color: green;
-  background: white;
-  border: 1px solid green;
-  border-radius: 50%;
-
-} */
 
 .react-calendar-timeline .rct-dateHeader-primary {
-  /* background-color: initial; */
-  /* border-left: 1px solid #bbb; */
-    /* border-right: 1px solid #bbb; */
   background: #ffeded;
   border: none;
   border-radius: 0%;
@@ -149,14 +255,11 @@ vidi kako da gi napravis datumite od vikendite dr boja! */
 }
 
 .react-calendar-timeline .rct-header-root {
-  /* background: #ffeded; */
   background: white;
-  /* border-bottom: 1px solid #bbb;  */
   border-bottom: none;
 }
 
 .react-calendar-timeline .rct-calendar-header {
-  /* border: 1px solid #bbb;  */
   background: white;
   border: none;
-}
+} */

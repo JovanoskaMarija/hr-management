@@ -6,6 +6,7 @@ import Dashboard from "./components/Dashboard";
 import Calendar from "./components/Calendar";
 import MyProfile from "./components/MyProfile";
 import 'antd/dist/antd.css';
+import Scheduler from "./components/Scheduler";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Dashboard path="/" />
         <Calendar path="calendar" />
         <MyProfile path="profile" />
+        <Scheduler path="scheduler" />
       </Router>
     </div>
   );
