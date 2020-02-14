@@ -19,9 +19,6 @@ class Calendar extends React.Component {
       // start: moment().add(1,"day"),
       // end: moment().add(10, "day")
     };
-
-    // this.previous = this.previous.bind(this);
-    // this.next = this.next.bind(this);
   }
 
   previous = () => {
@@ -30,36 +27,29 @@ class Calendar extends React.Component {
     this.setState({
       month: month.subtract(1, "month")
     });
-  }
+  };
 
-  next = () =>  {
+  next = () => {
     const { month } = this.state;
 
     this.setState({
       month: month.add(1, "month")
     });
-  }
+  };
 
-  select = (day) =>  {
-    // this.setState({
-    //   selected: day.date,
-    //   month: day.date.clone()
-    // }, console.log(day.date));
+  select = day => {
     if (!this.state.start) {
-      
       this.setState({
         selected: day.date,
-        start: day.date,
-        // end: moment().format("YYYY-MM-DD")
+        start: day.date
       });
-    } else if(!this.state.end){
+    } else if (!this.state.end) {
       this.setState({
         selected: day.date,
         end: day.date
       });
-      
     }
-  }
+  };
 
   renderWeeks() {
     let weeks = [];
@@ -72,7 +62,7 @@ class Calendar extends React.Component {
     let count = 0;
     let monthIndex = date.month();
 
-    const { selected, month } = this.state;
+    const { selected, month, start, end } = this.state;
 
     while (!done) {
       weeks.push(
@@ -82,6 +72,8 @@ class Calendar extends React.Component {
           month={month}
           select={day => this.select(day)}
           selected={selected}
+          start={start}
+          end={end}
         />
       );
 
@@ -102,12 +94,12 @@ class Calendar extends React.Component {
 
   resetDates = () => {
     this.setState({
-      selected: '',
-      start: '',
-      end: ''
+      selected: "",
+      start: "",
+      end: ""
     });
-    console.log(this.state.start, this.state.end)
-  }
+    console.log(this.state.start, this.state.end);
+  };
 
   render() {
     // function getRangeOfDates(start, end, key, arr = [start.startOf(key)]) {
@@ -143,9 +135,9 @@ class Calendar extends React.Component {
 
     const date_log = getDatesDiff(this.state.start, this.state.end);
     console.log(date_log);
-    console.log("Selected: ",this.state.selected)
-      console.log("Start: ",this.state.start)
-       console.log("End: ",this.state.end)
+    console.log("Selected: ", this.state.selected);
+    console.log("Start: ", this.state.start);
+    console.log("End: ", this.state.end);
 
     return (
       <div className="calendar-container">
@@ -160,9 +152,9 @@ class Calendar extends React.Component {
           </header>
           {this.renderWeeks()}
         </div>
-        <div className="calendar-buttons">
-          <button onClick={this.resetDates}>Reset</button>
-          <button>Confirm</button>
+        <div className="calendar-buttons-container">
+          <button onClick={this.resetDates} className="calendar-button" >Reset Selection</button>
+          <button className="calendar-button" >Confirm Selection</button>
         </div>
       </div>
     );
@@ -190,7 +182,7 @@ class Week extends React.Component {
     let days = [];
     let { date } = this.props;
 
-    const { month, selected, select } = this.props;
+    const { month, selected, select, start, end } = this.props;
 
     for (var i = 0; i < 7; i++) {
       let day = {
@@ -200,7 +192,7 @@ class Week extends React.Component {
         isToday: date.isSame(new Date(), "day"),
         date: date
       };
-      days.push(<Day day={day} selected={selected} select={select} />);
+      days.push(<Day day={day} selected={selected} select={select} start={start} end={end} />);
 
       date = date.clone();
       date.add(1, "day");
@@ -220,7 +212,9 @@ class Day extends React.Component {
       day,
       day: { date, isCurrentMonth, isToday, number },
       select,
-      selected
+      selected,
+      start,
+      end
     } = this.props;
 
     return (
@@ -230,7 +224,8 @@ class Day extends React.Component {
           "day" +
           (isToday ? " today" : "") +
           (isCurrentMonth ? "" : " different-month") +
-          (date.isSame(selected) ? " selected" : "")
+          (date.isSame(start) ? " selected" : "") +
+          (date.isSame(end) ? " selected" : "")
         }
         onClick={() => select(day)}
       >
