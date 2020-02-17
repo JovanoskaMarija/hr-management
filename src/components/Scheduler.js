@@ -1,17 +1,71 @@
 import React from "react";
 import moment from "moment";
-import "../style/calendar.css";
+import "../style/scheduler.css";
 import "font-awesome/css/font-awesome.min.css";
+import { Table } from "antd";
+
+
+
+const data = [
+  {
+    key: "1",
+    name: "John Brown",
+    '2/2/2020': "x",
+    "23/2/2020": "x",
+    "14/2/2020": "x",
+    "3/3/2020": "x"
+  },
+  {
+    key: "2",
+    name: "Jim Green",
+    '12/2/2020': "x",
+    "6/2/2020": "x",
+    "24/2/2020": "x",
+    "13/3/2020": "x"
+  },
+  {
+    key: "3",
+    name: "Joe Black",
+    '8/2/2020': "x",
+    "1/2/2020": "x",
+    "14/2/2020": "x",
+    "23/3/2020": "x"
+  }
+];
 
 class Scheduler extends React.Component {
-  constructor(props) {
-    super(props);
-
+  constructor() {
+    super();
     this.state = {
       month: moment()
     };
   }
 
+  monthDays = () => {
+    return this.state.month.clone().daysInMonth(); // dava denovi za tekovniot mesec
+  };
+
+  daysInCurrentMonth = [];
+  days = () => {
+    let x = this.monthDays();
+    let currentMonth = [{
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      width: 100,
+      fixed: 'left',
+      // width: "auto"
+    }]
+    for (let i = 1; i <= x; i++) {
+      let obj = {};
+      obj.key = (i + "/"+ this.state.month.format("M/YY"));
+      obj.title = i;
+      obj.dataIndex = (i + "/" + this.state.month.format("M/YYYY"));
+      currentMonth.push(obj);
+
+      this.daysInCurrentMonth = [...currentMonth]
+    }
+  };
   previous = () => {
     const { month } = this.state;
 
@@ -27,142 +81,30 @@ class Scheduler extends React.Component {
       month: month.add(1, "month")
     });
   };
-
-  renderDaysInMonth() {
-    let monthDays = [];
-    let done = false;
-    let date = this.state.month.clone().startOf("month");
-    // .add("m", 1)
-    // .day("Sunday");
-    let count = 0;
-    let monthIndex = date.month();
-
-    const { selected, month } = this.state;
-
-    while (!done) {
-      monthDays.push(
-        <MonthDays key={date} date={date.clone()} month={month} />
-      );
-
-      // date.add(-1, "w");
-      date.add(1, "w");
-
-      done = count++ && monthIndex !== date.month();
-      monthIndex = date.month();
-      // date = this.state.month.clone().endOf("month");
-    }
-
-    return monthDays;
-  }
-
-  renderMonthLabel() {
-    const { month } = this.state;
-
-    return <span className="month-label">{month.format("MMMM YYYY")}</span>;
-  }
-
   render() {
+    this.days();
+    console.log(this.state.month.format("MMMM"));
+    console.log(this.daysInCurrentMonth);
     return (
-      <div style={{display:"flex", justifyContent: "space-between"}}>
-        <div>
-          Maca
-        </div>
-        <div className="calendar">
-          <header className="calendar-header">
-            <div className="month-display row">
-              {this.renderMonthLabel()}
-              <i className="arrow fa fa-angle-left" onClick={this.previous} />
-              <i className="arrow fa fa-angle-right" onClick={this.next} />
-            </div>
-            {/* <DayNames /> */}
-          </header>
-          {this.renderDaysInMonth()}
-        </div>
+      <div>
+        <span>{this.state.month.format("MMMM")}</span>
+        <span>
+          <i className="arrow fa fa-angle-left" onClick={this.previous} />
+        </span>
+        <span>
+          <i className="arrow fa fa-angle-right" onClick={this.next} />
+        </span>
+        <Table
+          columns={this.daysInCurrentMonth}
+          dataSource={data}
+          style={{ boxSizing: "border-box", width: "90%", margin: "auto" }}
+          pagination={false}
+          bordered={false}
+          scroll={{ x: 1000}}
+        />
+        <p>Month Selected: {this.state.month.format("MMMM")}</p>
+        <p>days in current month: {this.monthDays()}</p>
       </div>
-    );
-  }
-}
-
-class DayNames extends React.Component {
-  render() {
-    return (
-      <div className="row day-names">
-        <span className="day">Sun</span>
-        <span className="day">Mon</span>
-        <span className="day">Tue</span>
-        <span className="day">Wed</span>
-        <span className="day">Thu</span>
-        <span className="day">Fri</span>
-        <span className="day">Sat</span>
-      </div>
-    );
-  }
-}
-
-class MonthDays extends React.Component {
-  render() {
-    let currentTime = new Date();
-    let currentYear = currentTime.getFullYear();
-    let day = currentTime.getDate();
-    let weekend = day === 0 || day === 1;
-    console.log(weekend);
-    let daysInMonth = () => {
-      return 32 - new Date(currentYear, 1, 32).getDate();
-    };
-
-    // let x = daysInMonth();
-    let x = 31;     // kako da prikaze za sekoj mesec soodvetno denovi 
-
-    let days = [];
-
-    let { date } = this.props;
-
-    const { month, selected, select } = this.props;
-
-    for (var i = 0; i < x; i++) {
-      let day = {
-        name: date.format("dd").substring(0, 1),
-        number: date.date(),
-        isCurrentMonth: date.month() === month.month(),
-        isToday: date.isSame(new Date(), "day"),
-        date: date
-      };
-      days.push(<Day day={day} selected={selected} select={select} />);
-
-      date = date.clone();
-      date.add(1, "day");
-    }
-
-    return (
-      <div className="row week" key={days[0]}>
-        {days}
-      </div>
-    );
-  }
-}
-
-class Day extends React.Component {
-  render() {
-    const {
-      day,
-      day: { date, isCurrentMonth, isToday, number },
-      select,
-      selected
-    } = this.props;
-
-    return (
-      <span
-        key={date.toString()}
-        className={
-          "day" +
-          (isToday ? " today" : "") +
-          (isCurrentMonth ? "" : " different-month") +
-          (date.isSame(selected) ? " selected" : "")
-        }
-        // onClick={()=>select(day)}
-      >
-        {number}
-      </span>
     );
   }
 }
