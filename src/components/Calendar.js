@@ -192,10 +192,10 @@ class Week extends React.Component {
         isToday: date.isSame(new Date(), "day"),
         date: date
       };
-      days.push(<Day day={day} selected={selected} select={select} start={start} end={end} />);
+      days.push(<Day day={day} selected={selected} select={select} start={start} end={end} />);       //denovi vo edna nedela
+      date = date.clone();      // site devoni prikazani na kalendarot (e.g. 26jan - 29 feb)
+      date.add(1, "day");     //eden den plus (e.g. 27jan -1 mart)
 
-      date = date.clone();
-      date.add(1, "day");
     }
 
     return (
