@@ -8,8 +8,8 @@ const Header = () => {
         <span className="grab"> Grab</span><span className="IT">IT</span>
       </div>
       <nav>
-        <Link to="/">Home</Link> | <Link to="calendar">Calendar</Link> |{" "}
-        <Link to="profile">My Profile</Link> | <Link to="scheduler">Scheduler</Link>
+        <Link to="/">Home</Link> | <Link to="scheduler">Scheduler</Link> | {" "}
+        <Link to="profile">My Profile</Link> | <Link to="calendar">Calendar</Link> |
       </nav>
     </div>
   );
