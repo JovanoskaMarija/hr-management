@@ -1,15 +1,15 @@
 import React from "react";
 import moment from "moment";
-import { Container, TableScheduler }  from "../style/scheduler.js";
+import { Container, TableScheduler } from "../style/scheduler.js";
 import "font-awesome/css/font-awesome.min.css";
-import { Table } from "antd";
-
+import { Table, Col } from "antd";
+const { Column, ColumnGroup } = Table;
 const data = [
   {
     key: "1",
-    name: "John Brown",
-    "2/2/2020": "x",
-    "23/2/2020": "x",
+    name: "Nikola",
+    "3/2/2020": "x",
+    "24/2/2020": "x",
     "14/2/2020": "x",
     "3/3/2020": "x"
   },
@@ -24,18 +24,18 @@ const data = [
   {
     key: "3",
     name: "Joe Black",
-    "8/2/2020": "x",
-    "1/2/2020": "x",
+    "18/2/2020": "x",
+    "6/2/2020": "x",
     "14/2/2020": "x",
-    "23/3/2020": "x"
+    "25/3/2020": "x"
   },
   {
     key: "4",
     name: "John Brown 2",
-    "2/2/2020": "x",
-    "23/2/2020": "x",
-    "14/2/2020": "x",
-    "3/3/2020": "x"
+    "7/2/2020": "x",
+    "20/2/2020": "x",
+    "11/2/2020": "x",
+    "2/3/2020": "x"
   },
   {
     key: "5",
@@ -48,8 +48,8 @@ const data = [
   {
     key: "6",
     name: "Joe Black 2",
-    "8/2/2020": "x",
-    "1/2/2020": "x",
+    "4/2/2020": "x",
+    "3/2/2020": "x",
     "14/2/2020": "x",
     "23/3/2020": "x"
   }
@@ -64,7 +64,7 @@ class Scheduler extends React.Component {
   }
 
   monthDays = () => {
-    return this.state.date.clone().daysInMonth(); // dava denovi za tekovniot mesec
+    return this.state.date.clone().daysInMonth(); // dava denovi za mesec
   };
 
   daysInCurrentMonth = [];
@@ -72,10 +72,9 @@ class Scheduler extends React.Component {
     let x = this.monthDays();
     let currentMonth = [
       {
-        title: "Name",
+        title: "",
         dataIndex: "name",
         key: "name",
-        className: "name-column",
         width: 250,
         fixed: "left"
       }
@@ -86,18 +85,19 @@ class Scheduler extends React.Component {
       obj.key = i + "/" + date.format("M/YYYY");
       obj.title = i;
       obj.dataIndex = i + "/" + date.format("M/YYYY");
-      obj.isToday = moment().format("D/M/YYYY") === obj.dataIndex ? true : false;
-      let day = moment( date.format("YYYY") + "-" + date.format("M") + "-" + i ).format("dddd");
+      obj.isToday =
+        moment().format("D/M/YYYY") === obj.dataIndex ? true : false;
+      let day = moment(
+        date.format("YYYY") + "-" + date.format("M") + "-" + i
+      ).format("dddd");
       obj.isWeekend = day === "Saturday" || day === "Sunday" ? true : false;
-      console.log(obj)
+      console.log(obj);
       currentMonth.push(obj);
       this.daysInCurrentMonth = [...currentMonth];
     }
-    
   };
   previous = () => {
     const { date } = this.state;
-
     this.setState({
       date: date.subtract(1, "month")
     });
@@ -105,13 +105,18 @@ class Scheduler extends React.Component {
 
   next = () => {
     const { date } = this.state;
-
     this.setState({
       date: date.add(1, "month")
     });
   };
+
   render() {
     this.days();
+    {
+      // data.map(data => {
+      //   console.log("data.dataIndex:", data);
+      // });
+    }
     return (
       <Container>
         <div className="month-header">
@@ -129,14 +134,29 @@ class Scheduler extends React.Component {
             </span>
           </div>
         </div>
-        <TableScheduler t={this.daysInCurrentMonth}>
+        <TableScheduler>
           <Table
-            columns={this.daysInCurrentMonth}
+            className="moja-tabela"
             dataSource={data}
             pagination={false}
             bordered={false}
-            scroll={{ x: 900, }}
-            />
+            scroll={{ x: 900 }}
+          >
+            {this.daysInCurrentMonth.map(day => {
+              return <Column
+                {...day}
+                className={day.isWeekend ? "weekend" : "not-weekend" && day.isToday ? " today" : " not-today" && data.name ? "name" : ""}
+              />
+            })}
+            
+            {/* {data.map(data => {
+              return <Column
+                {...data}
+                className={data.name ? "name" : ""  }
+              />
+              }
+            )} */}
+          </Table>
         </TableScheduler>
         <br /> <br /> <br />
         <div>
