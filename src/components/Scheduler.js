@@ -112,11 +112,6 @@ class Scheduler extends React.Component {
 
   render() {
     this.days();
-    {
-      // data.map(data => {
-      //   console.log("data.dataIndex:", data);
-      // });
-    }
     return (
       <Container>
         <div className="month-header">
@@ -149,13 +144,6 @@ class Scheduler extends React.Component {
               />
             })}
             
-            {/* {data.map(data => {
-              return <Column
-                {...data}
-                className={data.name ? "name" : ""  }
-              />
-              }
-            )} */}
           </Table>
         </TableScheduler>
         <br /> <br /> <br />
