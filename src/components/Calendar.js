@@ -1,8 +1,8 @@
 import React from "react";
 import moment from "moment";
 import "font-awesome/css/font-awesome.min.css";
-import "../style/calendar.css";
-import { Radio, Modal, Button, Input, DatePicker } from "antd";
+import "../style/CalendarStyle.js";
+import {CalendarWrapper} from '../style/CalendarStyle'
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -117,9 +117,8 @@ class Calendar extends React.Component {
 
   render() {
     return (
-      <div className="wrapper">
-        <div className="calendar-container">
-
+      <CalendarWrapper absence = {this.props.absence}>
+        {/* <div className="calendar-container"> */}
           <div className="calendar">
             <header className="calendar-header">
               <div className="month-display row">
@@ -135,15 +134,14 @@ class Calendar extends React.Component {
             <button onClick={this.resetDates} className="calendar-button">
               Reset Selection
             </button>
-            <button
-              onClick={this.chooseTypeOfAbsence}
-              className="calendar-button"
-            >
+            {this.props.selectHoliday ? " " : 
+            <button onClick={this.chooseTypeOfAbsence} className="calendar-button" >
               Confirm Selection
             </button>
+            }
           </div>
-        </div>
-      </div>
+        {/* </div> */}
+      </CalendarWrapper>
     );
   }
 }

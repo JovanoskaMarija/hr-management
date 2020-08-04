@@ -2,8 +2,8 @@ import React from "react";
 import moment from "moment";
 import { Container, TableScheduler } from "../style/scheduler.js";
 import "font-awesome/css/font-awesome.min.css";
-import { Table, Col } from "antd";
-const { Column, ColumnGroup } = Table;
+import { Table } from "antd";
+const { Column  } = Table;
 const data = [
   {
     key: "1",

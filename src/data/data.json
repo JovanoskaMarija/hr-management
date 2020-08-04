@@ -1,0 +1,13 @@
+[
+    {
+        "ime": "Marija",
+        "prezime": "Jovanoska",
+        "email" : "marija@gmrabit.mk",
+        "pozicija" : "software developer",
+        "telefon": " +389 71 221 833",
+        "adresa" : "Irina Ginova Mirka 30 Ohrid",
+        "datumNaVrabotuvanje" : "07/02/2020",
+        "denoviOdOdmor": "12",
+        "iskoristeniDenoviOdOdmor": []
+    }
+]

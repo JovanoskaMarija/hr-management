@@ -1,24 +1,23 @@
 import React from "react";
-import moment from "moment";
-import "font-awesome/css/font-awesome.min.css";
-import "../style/calendar.css";
-import { Radio, Modal, Button, Input, DatePicker } from "antd";
-import Calendar from './Calendar'
+// import moment from "moment";
+// import "font-awesome/css/font-awesome.min.css";
+import { Radio, Input } from "antd";
+import Calendar from "./Calendar";
+import { AddAbsenceStyle, Modal } from "../style/AddAbsenceStyle";
+
 class AddAbsence extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      absenceType: "",
+      absenceType: "vacation",
       modalVisible: false
     };
   }
 
   showModal = () => {
-    this.setState({
-      modalVisible: true
-    });
+    this.setState({ modalVisible: true });
   };
-  handleOk = () => {
+  onOk = () => {
     this.setState({ modalVisible: false });
   };
 
@@ -28,35 +27,32 @@ class AddAbsence extends React.Component {
     });
   };
   render() {
-    // console.log("absenceType", this.state.absenceType);
-    console.log()
+    console.log("absenceType", this.state.absenceType);
     return (
-      <div>
-        <p>Add Absence</p>
+      <AddAbsenceStyle>
+        <button className="add-holiday-button" onClick={this.showModal}>
+          Add Holiday
+        </button>
         <div>
-          <button className="calendar-button" onClick={this.showModal}>
-            Add Holiday
-          </button>
-          <Modal
-            title="Add Holiday"
-            closable={true}
-            width={400}
-            visible={this.state.modalVisible}
-            onOk={this.handleOk}
-            onCancel={this.handleOk}
-          >
-            <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }} >
-              <Input placeholder="Holiday's name"  />
-              <Calendar selectHoliday />
-            </div>
-          </Modal>
-        </div>
-        <div>
-          <p className="title" style={{ display: "block" }}>
-            Choose Absence Type
-          </p>
+          {this.state.modalVisible && (
+            <Modal>
+              <div className="modal-main">
+                <p className="modal-header">Add Holiday</p>
+                <Input
+                  size="large"
+                  placeholder="Holiday's name"
+                  className="input"
+                />
+                <Calendar selectHoliday />
+                <button onClick={this.onOk} className="add-holiday-button">
+                  OK
+                </button>
+              </div>
+            </Modal>
+          )}
         </div>
         <div className="type-of-absence">
+        <p className="title">Choose Absence Type</p>
           <Radio.Group
             defaultValue="vacation"
             onChange={this.onChangeAbsence}
@@ -70,7 +66,7 @@ class AddAbsence extends React.Component {
           </Radio.Group>
         </div>
         <Calendar absence />
-      </div>
+      </AddAbsenceStyle>
     );
   }
 }
